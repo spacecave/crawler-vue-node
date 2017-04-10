@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>promise测试</title>
+</head>
+<body>
+    <div id="a" name="b"></div>
+</body>
+<script type="text/javascript" src="./assets/jquery/jquery-1.8.0.min.js"></script>
+<script type="text/javascript">
+    ;(function () {
+        var getJSON = function(url) {
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    url : url,
+                    type:'get',
+                    success:function(data) {
+                        resolve(data);
+                    },
+                    error:function(e) {
+                        reject(e);
+                    }
+                });
+            });
+        }
+
+
+
+        //测试all()方法
+        var rendAll = function() {
+            return Promise.all([getJSON('/promise'), getJSON('/promise1')]);
+        }
+
+       // rendAll().then(value => console.log(value));
+
+        getJSON('/promise').then(data => {
+            alert(data);
+            return getJSON('/promise1');
+        }).then(data => {
+            alert(data);
+            return getJSON('/promise2');
+        }).then(data => alert(data));
+        
+        //测试resolve;
+        var aj = $.ajax({
+            url:'/promise1',
+            type:'post'
+        });
+
+        var repro = Promise.resolve(aj);
+   //     repro.then(data => alert(data));resolve方法结束
+
+
+    })()
+</script>
+</html>
