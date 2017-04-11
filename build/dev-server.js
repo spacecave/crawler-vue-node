@@ -25,6 +25,37 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 var compiler = webpack(webpackConfig)
 
+var apiRouter = express.Router();
+
+apiRouter.get('/promise1', function(req, res) {
+    res.json({
+        errno : 0,
+        data : '第一个例子'
+    })
+
+});
+
+apiRouter.get('/promise2', function(req, res) {
+    res.json({
+        errno : 0,
+        data : '第二个例子'
+    })
+
+});
+
+apiRouter.get('/promise3', function(req, res) {
+    res.json({
+        errno : 0,
+        data : '第三个例子'
+    })
+
+});
+
+app.use('/loc', express.static('../public'));
+
+app.use('/api', apiRouter);
+
+
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true

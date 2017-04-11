@@ -1,20 +1,34 @@
 var express = require('express');
 var app = express();
+var apiRouter = express.Router();
+
+apiRouter.get('/promise1', function(req, res) {
+    res.json({
+        errno : 0,
+        data : '第一个例子'
+    })
+
+});
+
+apiRouter.get('/promise2', function(req, res) {
+    res.json({
+        errno : 0,
+        data : '第二个例子'
+    })
+
+});
+
+apiRouter.get('/promise3', function(req, res) {
+    res.json({
+        errno : 0,
+        data : '第三个例子'
+    })
+
+});
 
 app.use('/loc', express.static('../public'));
 
-app.get('/promise', function(req, res, next) {
-    var str = '测试promise';
-    res.send(str);
-});
-
-app.get('/promise1', function(req, res) {
-    res.send('第二个例子');
-});
-
-app.get('/promise2', function(req, res) {
-    res.send('第三个例子');
-})
+app.use('/api', apiRouter);
 
 
 

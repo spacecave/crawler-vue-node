@@ -2,9 +2,31 @@
 <html>
 <head>
     <title>promise测试</title>
+    <style type="text/css">
+    .maintab {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        
+    }
+    .tab-1 {
+        flex: 1;
+        text-align: center;
+
+    }
+    .tab-2 {
+        flex: 3;
+        text-align: center;
+
+    }
+    </style>
 </head>
 <body>
-    <div id="a" name="b"></div>
+    <div id="a" name="b" class="maintab">
+        <div class="tab-1">第一个</div>
+        <div class="tab-1">第二个</div>
+        <div class="tab-2">第三个</div>
+    </div>
 </body>
 <script type="text/javascript" src="./assets/jquery/jquery-1.8.0.min.js"></script>
 <script type="text/javascript">
@@ -28,26 +50,28 @@
 
         //测试all()方法
         var rendAll = function() {
-            return Promise.all([getJSON('/promise'), getJSON('/promise1')]);
+            return Promise.all([getJSON('/api/promise2'), getJSON('/api/promise1')]);
         }
 
-       // rendAll().then(value => console.log(value));
-
-        getJSON('/promise').then(data => {
-            alert(data);
-            return getJSON('/promise1');
-        }).then(data => {
-            alert(data);
-            return getJSON('/promise2');
-        }).then(data => alert(data));
-        
-        //测试resolve;
-        var aj = $.ajax({
-            url:'/promise1',
-            type:'post'
+        rendAll().then(function(value) {
+            console.log(value);
         });
 
-        var repro = Promise.resolve(aj);
+        // getJSON('/api/promise1').then(data => {
+        //     alert(data.data);
+        //     return getJSON('/api/promise2');
+        // }).then(data => {
+        //     alert(data.data);
+        //     return getJSON('/api/promise3');
+        // }).then(data => alert(data.data));
+        
+        //测试resolve;
+   //     var aj = $.ajax({
+        //     url:'/api/promise1',
+        //     type:'post'
+        // });
+
+    //    var repro = Promise.resolve(aj);
    //     repro.then(data => alert(data));resolve方法结束
 
 

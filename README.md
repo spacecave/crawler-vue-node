@@ -1,4 +1,4 @@
-# my-project
+# crawler-vue-node
 
 > A Vue.js project
 
@@ -25,4 +25,6 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# crawler-vue-node
+# description
+
+> vue项目，初步想法用来写一个爬虫，爬火影忍者手游的最新消息
