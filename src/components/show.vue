@@ -10,9 +10,11 @@
             }
         },
         created() {
-            this.$http.get('/api/promise1').then(response => {
+            this.$http.get('/api/promise2').then(response => {
                 var body = response.body;
+                this.msg = body.data;
             });
+
         }
     }
 </script>

@@ -44,26 +44,49 @@
                     }
                 });
             });
+        };
+
+        var getTimeout = function(url) {
+            return new Promise(function(resolve, reject) {
+              
+                $.ajax({
+                    url : url,
+                    type:'get',
+                    success:function(data) {
+                        setTimeout(() => {
+                            resolve(data);
+                        },5*1000)
+                        
+                       
+                        
+                    },
+                    error:function(e) {
+                        reject(e);
+                    }
+                });
+             
+                
+            });
         }
 
 
 
         //测试all()方法
-        var rendAll = function() {
-            return Promise.all([getJSON('/api/promise2'), getJSON('/api/promise1')]);
-        }
+        // var rendAll = function() {
+        //     return Promise.all([getJSON('/api/promise2'), getJSON('/api/promise1')]);
+        // }
 
-        rendAll().then(function(value) {
-            console.log(value);
-        });
+        // rendAll().then(function(value) {
+        //     console.log(value);
+        // });
 
-        // getJSON('/api/promise1').then(data => {
-        //     alert(data.data);
-        //     return getJSON('/api/promise2');
-        // }).then(data => {
-        //     alert(data.data);
-        //     return getJSON('/api/promise3');
-        // }).then(data => alert(data.data));
+        getJSON('/api/promise1').then(data => {
+            console.log(data.data);
+            return getTimeout('/api/promise2');
+        }).then(data => {
+            console.log(data.data);
+            return getTimeout('/api/promise3');
+        }).then(data => console.log(data.data));
         
         //测试resolve;
    //     var aj = $.ajax({

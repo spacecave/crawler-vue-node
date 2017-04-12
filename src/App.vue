@@ -1,9 +1,11 @@
 <template>
   <div id = 'app'>
-    测试
-    <router-link to="/hello">hello</router-link>
+    
+    <router-link to="/hello">hello{{msg}}</router-link>
 
     <router-link to="/show">show</router-link>
+
+    <Hello :hello="hello"></Hello>
   
     <router-view></router-view>
   </div>
@@ -13,7 +15,20 @@
 import Hello from "./components/Hello.vue";
 
 export default {
-//  components:{Hello}
+  data() {
+    return {
+      msg: {},
+      hello:{}
+    };
+  },
+  created() {
+    this.$http.get('/api/promise1').then(data => {
+      data = data.body;
+      this.msg = data.data;
+      this.hello = data;
+    });
+  },
+  components:{Hello}
 }
 </script>
 
