@@ -14,9 +14,11 @@
   "dependencies": {
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
-    "vue-resource": "^1.0.1"
+    "vue-resource": "^1.2.1",
+    "jquery" : "^2.2.3"
   },
   "devDependencies": {
+    "iview": "^2.0.0-rc.10",
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
@@ -28,8 +30,12 @@
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
+    "stylus-loader": "^2.1.1",
+    "stylus": "^0.52.4",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
+    "cheerio": "^0.17.0",
+    "superagent": "^0.20.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.0",
     "friendly-errors-webpack-plugin": "^1.1.3",
@@ -53,7 +59,9 @@
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1",
-    "webpack-merge": "^2.6.1"
+    "webpack-merge": "^2.6.1",
+    "body-parser": "^1.17.1",
+    "multer": "1.3.0"
   },
   "engines": {
     "node": ">= 4.0.0",

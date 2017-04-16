@@ -1,6 +1,6 @@
 <template>
-    <div >
-    你好啊,这是<span>{{hello.errno}}</span>
+  <div id="app">
+     <Input v-model="value" placeholder="请输入url..." style="width: 300px"></Input>
   </div>
 </template>
 
@@ -16,6 +16,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="stylus" rel="stylesheet/stylus">
 
 </style>

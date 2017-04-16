@@ -35,7 +35,10 @@
             return new Promise(function(resolve, reject) {
                 $.ajax({
                     url : url,
-                    type:'get',
+                    data : {
+                        test:'ceshi'
+                    },
+                    type:'post',
                     success:function(data) {
                         resolve(data);
                     },
@@ -80,13 +83,10 @@
         //     console.log(value);
         // });
 
-        getJSON('/api/promise1').then(data => {
+        getJSON('/api/promise2').then(data => {
             console.log(data.data);
-            return getTimeout('/api/promise2');
-        }).then(data => {
-            console.log(data.data);
-            return getTimeout('/api/promise3');
-        }).then(data => console.log(data.data));
+           // return getTimeout('/api/promise1');
+        })
         
         //测试resolve;
    //     var aj = $.ajax({

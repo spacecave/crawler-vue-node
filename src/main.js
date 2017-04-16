@@ -4,17 +4,22 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 import App from './App.vue';
 import VueRouter from 'vue-router';
-import Hello from './components/Hello.vue';
-import Show from './components/show.vue';
+import Sel from './components/select/Sel.vue';
+import Show from './components/content/content.vue';
+import iview from 'iview';
+import 'iview/dist/styles/iview.css';
 
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(iview);
+
+Vue.http.options.emulateJSON = true;
 
 //let app = Vue.extend(App);
 
 const routes = [
-    { path: '/hello', component: Hello},
+    { path: '/sel', component: Sel},
     { path: '/show', component: Show},
 ];
 
