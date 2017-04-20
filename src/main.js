@@ -7,12 +7,14 @@ import VueRouter from 'vue-router';
 import Sel from './components/select/Sel.vue';
 import Show from './components/content/content.vue';
 import iview from 'iview';
+import Vuex from 'vuex';
 import 'iview/dist/styles/iview.css';
 
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
-Vue.use(iview);
+Vue.use(Vuex);
+//Vue.use(iview);
 
 Vue.http.options.emulateJSON = true;
 
@@ -28,11 +30,18 @@ const router = new VueRouter({
     routes
 });
 
+const vuex_store = new Vuex.Store({
+    state: {
+        input_name : ''
+    }
+});
+
 
 //router.start(app, '#app');
 
 new Vue({
     el: '#app',
     router,
+    store:vuex_store,
     render: h => h(App)
 })

@@ -15,15 +15,15 @@
     export default {
         data() {
             return {
-                msg:'test1'
+                msg:this.$store.state.input_name
             }
         },
         created() {
-            this.$http.get('/api/promise2').then(response => {
-                var body = response.body;
-                this.msg = body.data;
-            });
-
+            //测试vue-resource方法部分。目前存在get方法无法发送到后台的问题
+            // this.$http.get('/api/promise2').then(response => {
+            //     var body = response.body;
+            //     this.msg = body.data;
+            // });
         }
     }
 </script>

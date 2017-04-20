@@ -8,7 +8,7 @@
 
     <v-sel :hello="hello"></v-sel>
 
-    <v-show></v-show>
+    <!-- <v-show></v-show> -->
   
     <router-view></router-view>
   </div>
@@ -33,11 +33,11 @@ export default {
     var formData = new FormData();
 
     // formData.append('foo', 'bar');
-    this.$http.post('/api/promise2',{params:'1'}).then(data => {
-      data = data.body;
-      this.msg = data.data;
-      this.hello = data;
-    });
+    // this.$http.post('/api/promise2',{params:'1'}).then(data => {
+    //   data = data.body;
+    //   this.msg = data.data;
+    //   this.hello = data;
+    // });
     // var _this = this;
     // $.ajax({
     //   url:'/api/promise2',

@@ -67,6 +67,38 @@ apiRouter.get('/promise3', function(req, res) {
 
 });
 
+apiRouter.post('/urlcraw', function(req, res, next) {
+  var params = req.body;
+  console.log(params.url);
+  superagent.get(params.url)
+    .end(function (err, sres) {
+      if (err) {
+        console.log('错误');
+        return next(err);
+      }
+      var $ = cheerio.load(sres.text);
+      var items = [];
+      console.log($('title').html());
+      $('.j_th_tit').each(function (idx, element) {
+        var $element = $(element),
+        _title = $element.attr('title') + '',
+        _href = $element.attr('href');
+        var keywords = ['IOS', '更新'];
+
+        if(_title.indexOf('IOS') != -1 || _title.indexOf('更新') != -1) {
+          items.push({
+          title: $element.attr('title'),
+          href: 'https://tieba.baidu.com' + $element.attr('href')
+        });
+        }
+
+        
+      });
+
+      res.send($('title').html());
+    });
+});
+
 app.use('/loc', express.static('../public'));
 
 app.use('/api', apiRouter);
