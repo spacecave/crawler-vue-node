@@ -2,7 +2,7 @@
   <div id="app">
     <div class="content">
       <div class="content-left">
-        <p>URL：</p><input id="httpurl" class="iview-input" type="text" v-model="test" @keyup.enter="urlenter"/>
+        <p>URL：</p><input id="httpurl" class="iview-input" type="text" v-model="testmo" @keyup.enter="urlenter"/>
       </div>
       <div class="content-right">
         <ul>
@@ -16,11 +16,18 @@
       
     <div class="content">
       <div class="content-left">
-        <p>关键字：</p><input id="keywords" class="iview-input" type="text">
+        <p>关键字：</p><input id="keywords" class="iview-input" type="text" v-model="keymo" @keyup.enter="keyenter"/>
       </div>
+      <div class="content-right"></div>
+      <ul>
+        <li v-for = "kw in keycontent">
+          {{kw}}
+        </li>
+      </ul>
     </div>
     
-    
+    <button class="btn" @click="confirm">确认</button>
+
   </div>
 </template>
 
@@ -35,19 +42,32 @@ export default {
   },
   data() {
     return {
-      //  test:this.hello.data
-      urlcontent:[]
+      testmo:this.hello.data,
+      keymo:'',
+      urlcontent:[],//输入的url集合
+      keycontent:[]//输入的关键字集合
     }
   },
   methods: {
     urlenter() {
       this.$http.post('/api/urlcraw', {url:this.test}).then(response => {
           var body = response.body;
-          this.msg = body.data;
+          body = unescape(body.replace(/&#x/g,'%u').replace(/;/g,''));
+          console.log(body);
+          this.testmo = body;
+          this.urlcontent.push(this.testmo);
+          this.testmo = '';
       });
-      this.urlcontent.push(this.test);
-      this.test = '';
+      // this.urlcontent.push(this.test);
+      // this.test = '';
         
+    },
+    keyenter() {
+      this.keycontent.push(this.keymo);
+      this.keymo = '';
+    },
+    confirm() {
+      this.$router.push({path: '/show'})
     }
   }
 }
@@ -55,8 +75,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" rel="stylesheet/stylus">
+  html 
+    width: 100%
+    height: 100%
+    body
+      width: 100%
+      height: 100%
   #app
-    display:flex
+    display:flex;
+    position: relative;
     width:90%
     height:100%
     margin:auto
@@ -75,7 +102,7 @@ export default {
         margin-right:100px;
     .iview-input 
       display: inline-block
-      width: 130ps
+      width: 130px
       height: 32px
       line-height: 1.5
       padding: 4px 7px
@@ -89,5 +116,12 @@ export default {
       cursor: text
       transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out
       &:hover 
-        border-color: #5cadff;
+        border-color: #5cadff
+    .btn 
+      position: absolute
+      width: 100px
+      height: 50px
+      bottom: 10px
+      left: 40%
+        
 </style>

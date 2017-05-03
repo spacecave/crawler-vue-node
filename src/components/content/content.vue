@@ -30,6 +30,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
     #app2 
+        width: 90%
         margin-top: 10px
         border:1px solid #000
         .tab

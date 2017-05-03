@@ -16,7 +16,7 @@
 
 <script>
 import Sel from "./components/select/Sel.vue";
-import Show from "./components/content/content.vue";
+
 
 
 import $ from "jquery";
@@ -54,8 +54,7 @@ export default {
     
   },
   components:{
-    'v-sel': Sel,
-   'v-show': Show
+    'v-sel': Sel
   }
 }
 </script>
