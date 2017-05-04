@@ -99,6 +99,62 @@ apiRouter.post('/urlcraw', function(req, res, next) {
     });
 });
 
+apiRouter.post('/contentcraw', function(req, res, next) {
+  var params = req.body;
+  var urls = params.url;
+
+  var items = [];
+  var count = 0;
+  if(Array.isArray(urls)) {
+    for(var u = 0, ulen = urls.length; u < ulen; u ++) {
+      superagent.get(urls[u])
+        .end(function (err, sres) {
+          count ++;
+          if (err) {
+            console.log('错误');
+            return next(err);
+          }
+          
+          var $ = cheerio.load(sres.text);
+         
+          console.log($('title').html());
+          $('.j_th_tit').each(function (idx, element) {
+            var $element = $(element),
+            _title = $element.attr('title') + '',
+            _href = $element.attr('href');
+            var keywords = params.kw;
+
+
+            if(Array.isArray(keywords)) {
+              for(var i = 0; i < keywords.length; i ++) {
+                console.log(keywords[i] + _title);
+                if(_title.indexOf(keywords[i]) != -1) {
+                  items.push({
+                    title: $element.attr('title'),
+                    href: 'https://tieba.baidu.com' + $element.attr('href')
+                  });
+                }
+              }
+            }
+
+
+            
+          });
+          if(count == ulen) {
+            res.json({
+              'result':items
+            });
+          }
+          
+        });
+
+      
+    }
+  }
+
+  
+});
+
 app.use('/loc', express.static('../public'));
 
 app.use('/api', apiRouter);

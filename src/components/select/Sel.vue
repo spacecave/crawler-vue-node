@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-show="selWin">
     <div class="content">
       <div class="content-left">
         <p>URL：</p><input id="httpurl" class="iview-input" type="text" v-model="testmo" @keyup.enter="urlenter"/>
@@ -42,7 +42,9 @@ export default {
   },
   data() {
     return {
+      selWin:true,//控制窗口隐藏和显示
       testmo:this.hello.data,
+      urls:[],//未获取title前的url
       keymo:'',
       urlcontent:[],//输入的url集合
       keycontent:[]//输入的关键字集合
@@ -50,7 +52,8 @@ export default {
   },
   methods: {
     urlenter() {
-      this.$http.post('/api/urlcraw', {url:this.test}).then(response => {
+      this.urls.push(this.testmo);
+      this.$http.post('/api/urlcraw', {url:this.testmo}).then(response => {
           var body = response.body;
           body = unescape(body.replace(/&#x/g,'%u').replace(/;/g,''));
           console.log(body);
@@ -67,7 +70,13 @@ export default {
       this.keymo = '';
     },
     confirm() {
-      this.$router.push({path: '/show'})
+      this.selWin = false;
+      this.$http.post('/api/contentcraw', {url:this.urls, kw:this.keycontent}).then(response => {
+        var body = response.body;
+        console.log(body);
+        this.$router.push({path: '/show',query: body});
+      });
+      
     }
   }
 }

@@ -1,11 +1,20 @@
 <template>
     <div id="app2">
-        <div>爬取数据显示区域{{msg}}</div>
-        <div class="tab">
-            <div class="tab-item">first</div>
-            <div class="tab-item">second</div>
-            <div class="tab-item">third</div>
-        </div>
+       
+        
+          
+            <ul>
+                <li v-for = "item in msg.result">
+                    <div class="tab">
+                        <div class="tab-item">{{item.title}}</div> 
+                        <div class="tab-item"><a>{{item.href}}</a></div>
+                     </div>
+                </li>
+            </ul>
+            
+            
+       
+        
          
     </div>
     
@@ -24,6 +33,8 @@
             //     var body = response.body;
             //     this.msg = body.data;
             // });
+            this.msg = this.$route.query;
+            console.log(this.$route.query);
         }
     }
 </script>
